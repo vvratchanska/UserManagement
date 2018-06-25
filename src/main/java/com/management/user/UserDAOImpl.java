@@ -7,7 +7,7 @@ import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
 
 @Repository
-public class UserDAOImpl {
+public class UserDAOImpl implements UserDAO{
 
 	@Autowired
 	private JdbcTemplate jdbcTemplate;
@@ -18,9 +18,9 @@ public class UserDAOImpl {
 				newUserObject.getRole(), newUserObject.getPassword());
 	}
 
-	public User getUserById(Integer id) {
-		String SQL = "select * from user where id = ?";
-		User user = jdbcTemplate.queryForObject(SQL, new Object[] { id }, new UserMapper());
+	public User getUserByEmail(String email) {
+		String SQL = "select * from user where email = ?";
+		User user = jdbcTemplate.queryForObject(SQL, new Object[] { email }, new UserMapper());
 		return user;
 	}
 
@@ -30,14 +30,14 @@ public class UserDAOImpl {
 		return students;
 	}
 
-	public void deleteUserById(Integer id) {
-		String SQL = "delete from user where id = ?";
-		jdbcTemplate.update(SQL, id);
+	public void deleteUserByEmail(String email) {
+		String SQL = "delete from user where email = ?";
+		jdbcTemplate.update(SQL, email);
 	}
 
 	public void updateUser(User userForUpdate) {
-		String SQL = "update user set first_name = ?, last_name = ?, role = ?, password = ? where id = ?";
+		String SQL = "update user set first_name = ?, last_name = ?, role = ?, password = ? where email = ?";
 		jdbcTemplate.update(SQL, userForUpdate.getFirstName(), userForUpdate.getLastName(), userForUpdate.getRole(),
-				userForUpdate.getPassword(), userForUpdate.getId());
+				userForUpdate.getPassword(), userForUpdate.getEmail());
 	}
 }
