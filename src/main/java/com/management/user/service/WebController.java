@@ -53,9 +53,9 @@ public class WebController {
 		return new ResponseEntity<User>(HttpStatus.CREATED);
 	}
 
-	@RequestMapping(value = "/update-user", method = RequestMethod.PUT)
-	public ResponseEntity<User> updateUser(@RequestBody User user) {
-		User currentUser = userDaoImpl.getUserByEmail(user.getEmail());
+	@RequestMapping(value = "/update-user/{email}", method = RequestMethod.PUT)
+	public ResponseEntity<User> updateUser(@RequestBody User user, @PathVariable("email") String email) {
+		User currentUser = userDaoImpl.getUserByEmail(email);
 		if (currentUser == null) {
 			return new ResponseEntity<User>(HttpStatus.NOT_FOUND);
 		}
