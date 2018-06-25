@@ -1,27 +1,13 @@
-package com.management.user;
+package com.management.user.entity;
 
 public class User {
 
-	private Integer id;
 	private String firstName;
 	private String lastName;
 	private String email;
 	private String role;
 	private String password;
-	
-/*	@Override
-    public String toString() {
-        return String.format(
-                "User[id=%d, firstName='%s', lastName='%s', email='%s', role='%s', password='%s']",
-                id, firstName, lastName, email, role, password);
-    }
-	*/
-	public Integer getId() {
-		return id;
-	}
-	public void setId(Integer id) {
-		this.id = id;
-	}
+
 	public String getFirstName() {
 		return firstName;
 	}

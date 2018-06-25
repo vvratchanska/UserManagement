@@ -1,10 +1,12 @@
-package com.management.user;
+package com.management.user.dao;
 
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
+
+import com.management.user.entity.User;
 
 @Repository
 public class UserDAOImpl implements UserDAO{
@@ -20,7 +22,12 @@ public class UserDAOImpl implements UserDAO{
 
 	public User getUserByEmail(String email) {
 		String SQL = "select * from user where email = ?";
-		User user = jdbcTemplate.queryForObject(SQL, new Object[] { email }, new UserMapper());
+		User user;
+		try {
+			user = jdbcTemplate.queryForObject(SQL, new Object[] { email }, new UserMapper());
+		} catch (Exception e) {
+			user = null;
+		}
 		return user;
 	}
 

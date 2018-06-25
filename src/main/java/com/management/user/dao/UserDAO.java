@@ -1,6 +1,8 @@
-package com.management.user;
+package com.management.user.dao;
 
 import java.util.List;
+
+import com.management.user.entity.User;
 
 public interface UserDAO {
 	

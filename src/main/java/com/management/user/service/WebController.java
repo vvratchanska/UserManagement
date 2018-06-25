@@ -1,4 +1,4 @@
-package com.management.user;
+package com.management.user.service;
 
 import java.util.List;
 
@@ -12,6 +12,9 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
+
+import com.management.user.dao.UserDAOImpl;
+import com.management.user.entity.User;
 
 @RestController
 public class WebController {
@@ -46,7 +49,7 @@ public class WebController {
 		if (currentUser != null) {
 			return new ResponseEntity<User>(HttpStatus.CONFLICT);
 		}
-		userDaoImpl.updateUser(user);
+		userDaoImpl.createUser(user);
 		return new ResponseEntity<User>(HttpStatus.CREATED);
 	}
 
